@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "554303522773",
+    "project_id": "commit-84ac2",
+    "storage_bucket": "commit-84ac2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:554303522773:android:722b466901c03cff899f5c",
+        "android_client_info": {
+          "package_name": "com.ruhacks.commit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "554303522773-b6g5ftf52cqpacunh3ic54pj7jhkh3ns.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDeA_35w9Pc1GcVP0CTDYqEUnLedPc9tQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "554303522773-b6g5ftf52cqpacunh3ic54pj7jhkh3ns.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
