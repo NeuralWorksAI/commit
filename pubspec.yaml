@@ -49,6 +49,8 @@ flutter:
   assets:
     - assets/pd.png
     - assets/announcment.png
+    - assets/angel.png
+    - assets/peace.png
   fonts:
     - family: MyFlutterApp
       fonts:
