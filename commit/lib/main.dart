@@ -1,51 +1,26 @@
+import 'package:date_format/date_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import 'my_flutter_app_icons.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(Create_Task());
 }
 
-class MyApp extends StatelessWidget {
+class Create_Task extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-        // This makes the visual density adapt to the platform that you run
-        // the app on. For desktop platforms, the controls will be smaller and
-        // closer together (more dense) than on mobile platforms.
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   final String title;
 
   @override
@@ -55,25 +30,27 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              'assets/pd.png',
+              'assets/announcment.png',
               fit: BoxFit.contain,
               height: 60,
             ),
             Container(
                 padding: const EdgeInsets.all(8.0),
-                child: Text('Enter Payment Details'))
+                child: Column(children: [
+                  Text('Create a new task'),
+                  Text(
+                    "Set the goal, and commit!",
+                    style:
+                        TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
+                  ),
+                ]))
           ],
         ),
         toolbarHeight: 80.0,
@@ -117,6 +94,60 @@ class MyCustomFormState extends State<MyCustomForm> {
   // Create a global key that uniquely identifies the Form widget
   // and allows validation of the form.
   final _formKey = GlobalKey<FormState>();
+  String _setTime, _setDate;
+
+  String _hour, _minute, _time;
+
+  String dateTime;
+
+  DateTime selectedDate = DateTime.now();
+
+  TimeOfDay selectedTime = TimeOfDay(hour: 00, minute: 00);
+
+  TextEditingController _dateController = TextEditingController();
+  TextEditingController _timeController = TextEditingController();
+
+  Future<Null> _selectDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        initialDatePickerMode: DatePickerMode.day,
+        firstDate: DateTime(2015),
+        lastDate: DateTime(2101));
+    if (picked != null)
+      setState(() {
+        selectedDate = picked;
+        _dateController.text = DateFormat.yMd().format(selectedDate);
+      });
+  }
+
+  Future<Null> _selectTime(BuildContext context) async {
+    final TimeOfDay picked = await showTimePicker(
+      context: context,
+      initialTime: selectedTime,
+    );
+    if (picked != null)
+      setState(() {
+        selectedTime = picked;
+        _hour = selectedTime.hour.toString();
+        _minute = selectedTime.minute.toString();
+        _time = _hour + ' : ' + _minute;
+        _timeController.text = _time;
+        _timeController.text = formatDate(
+            DateTime(2019, 08, 1, selectedTime.hour, selectedTime.minute),
+            [hh, ':', nn, " ", am]).toString();
+      });
+  }
+
+  @override
+  void initState() {
+    _dateController.text = DateFormat.yMd().format(DateTime.now());
+
+    _timeController.text = formatDate(
+        DateTime(2019, 08, 1, DateTime.now().hour, DateTime.now().minute),
+        [hh, ':', nn, " ", am]).toString();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -127,38 +158,42 @@ class MyCustomFormState extends State<MyCustomForm> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            "\n\n Email\n",
+            "\n\n Name of task \n",
             style: TextStyle(
               color: const Color(0xff324982),
               fontWeight: FontWeight.bold,
             ),
           ),
           TextFormField(
+            maxLines: 1,
             decoration: const InputDecoration(
-              hintText: 'Enter your email',
               contentPadding:
-                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                  const EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
               border: OutlineInputBorder(
                 borderRadius: const BorderRadius.all(Radius.circular(20.0)),
               ),
             ),
           ),
-          Text(
-            "\nSave Card Information",
-            style: TextStyle(
-              color: const Color(0xff324982),
-              fontWeight: FontWeight.bold,
-            ),
+          Row(
+            children: [
+              Text(
+                '\nI commit to ',
+                style: TextStyle(
+                    color: const Color(0xff324982),
+                    fontWeight: FontWeight.bold),
+              ),
+              Text(
+                '\n(500 characters max)',
+                style: TextStyle(
+                    color: const Color(0xff324982),
+                    fontWeight: FontWeight.normal),
+              ),
+            ],
           ),
-          Text(
-            "\n Card Information\n",
-            style: TextStyle(
-              color: const Color(0xff324982),
-            ),
-          ),
+          Text('\n'),
           TextFormField(
+            maxLines: 5,
             decoration: const InputDecoration(
-              hintText: '1231  1234 1234 1241',
               contentPadding:
                   const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
               border: OutlineInputBorder(
@@ -167,65 +202,85 @@ class MyCustomFormState extends State<MyCustomForm> {
             ),
           ),
           Text('\n'),
+          Text(
+            '\n Deadline \n',
+            style: TextStyle(
+                color: const Color(0xff324982), fontWeight: FontWeight.bold),
+          ),
           Row(children: [
-            Expanded(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  hintText: 'MM/YY',
-                  contentPadding: const EdgeInsets.symmetric(
-                      vertical: 10.0, horizontal: 20.0),
-                  border: OutlineInputBorder(
-                    borderRadius: const BorderRadius.all(Radius.circular(20.0)),
+            InkWell(
+              onTap: () {
+                _selectDate(context);
+              },
+              child: Container(
+                width: 150,
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+                    border: OutlineInputBorder(
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(10.0)),
+                    ),
                   ),
+                  enabled: false,
+                  keyboardType: TextInputType.text,
+                  controller: _dateController,
+                  onSaved: (String val) {
+                    _setDate = val;
+                  },
                 ),
               ),
             ),
-            SizedBox(
-              width: 20,
-            ),
-            Expanded(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  hintText: 'CVC',
-                  contentPadding: const EdgeInsets.symmetric(
-                      vertical: 10.0, horizontal: 20.0),
-                  border: OutlineInputBorder(
-                    borderRadius: const BorderRadius.all(Radius.circular(20.0)),
+            InkWell(
+              onTap: () {
+                _selectTime(context);
+              },
+              child: Container(
+                width: 120,
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+                    border: OutlineInputBorder(
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(10.0)),
+                    ),
                   ),
+                  onSaved: (String val) {
+                    _setTime = val;
+                  },
+                  enabled: false,
+                  keyboardType: TextInputType.text,
+                  controller: _timeController,
+
+                  // labelText: 'Time',
                 ),
               ),
             )
           ]),
           Text(
-            '\n Name on Card\n',
+            '\n Stake \n',
             style: TextStyle(
-              color: const Color(0xff324982),
-            ),
+                color: const Color(0xff324982), fontWeight: FontWeight.bold),
           ),
-          TextFormField(
-            decoration: InputDecoration(
-              contentPadding:
-                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-              border: OutlineInputBorder(
-                borderRadius: const BorderRadius.all(Radius.circular(20.0)),
+          Row(children: [
+            Container(
+              width: 80,
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: TextFormField(
+                decoration: const InputDecoration(
+                  contentPadding: const EdgeInsets.symmetric(
+                      vertical: 0.0, horizontal: 20.0),
+                  border: OutlineInputBorder(
+                    borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+                  ),
+                ),
               ),
             ),
-          ),
-          Text(
-            '\n Country or region\n',
-            style: TextStyle(
-              color: const Color(0xff324982),
-            ),
-          ),
-          TextFormField(
-            decoration: const InputDecoration(
-              contentPadding:
-                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-              border: OutlineInputBorder(
-                borderRadius: const BorderRadius.all(Radius.circular(20.0)),
-              ),
-            ),
-          ),
+            Text(
+              "\$",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            )
+          ]),
           Text('\n'),
           new Container(
               height: 40.0,
@@ -237,11 +292,10 @@ class MyCustomFormState extends State<MyCustomForm> {
                 ),
               ),
               margin: new EdgeInsets.symmetric(horizontal: 20.0),
-              child: new RaisedButton(
-                disabledColor: Colors.transparent,
+              child: new ElevatedButton(
                 onPressed: null,
                 child: const Text(
-                  'Save Card',
+                  'Commit',
                   style: TextStyle(color: Colors.white),
                 ),
               )),
