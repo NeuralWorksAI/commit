@@ -1,31 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../../components/my_flutter_app_icons.dart';
 
-import 'my_flutter_app_icons.dart';
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class Payment extends StatefulWidget {
+  Payment({Key key, this.title}) : super(key: key);
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _PaymentState createState() => _PaymentState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _PaymentState extends State<Payment> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         toolbarHeight: 80.0,
       ),
-      body: MyCustomForm(),
+      body: CardDetailsForm(),
       bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
@@ -72,15 +57,15 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class MyCustomForm extends StatefulWidget {
+class CardDetailsForm extends StatefulWidget {
   @override
-  MyCustomFormState createState() {
-    return MyCustomFormState();
+  CardDetailsFormState createState() {
+    return CardDetailsFormState();
   }
 }
 
 // Create a corresponding State class. This class holds data related to the form.
-class MyCustomFormState extends State<MyCustomForm> {
+class CardDetailsFormState extends State<CardDetailsForm> {
   // Create a global key that uniquely identifies the Form widget
   // and allows validation of the form.
   final _formKey = GlobalKey<FormState>();

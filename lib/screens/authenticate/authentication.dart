@@ -1,3 +1,4 @@
+import 'package:commit/screens/authenticate/register.dart';
 import 'package:commit/screens/authenticate/sign_in.dart';
 import 'package:flutter/material.dart';
 
