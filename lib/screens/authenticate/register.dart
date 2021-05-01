@@ -2,6 +2,9 @@ import 'package:commit/services/auth.dart';
 import 'package:flutter/material.dart';
 
 class Register extends StatefulWidget {
+  final Function toggleView;
+  Register({this.toggleView});
+
   @override
   _RegisterState createState() => _RegisterState();
 }
@@ -15,7 +18,7 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+        backgroundColor: Colors.white,
         body: Container(
             padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
             child: Form(
@@ -42,20 +45,17 @@ class _RegisterState extends State<Register> {
                       print(email);
                       print(password);
                     },
-                    
                   ),
                   ElevatedButton(
                     child: Text(
                       'Back to sign in',
                     ),
                     onPressed: () async {
-                      print(email);
-                      print(password);
+                      widget.toggleView();
                     },
                   ),
                 ],
               ),
-            ))
-    );
+            )));
   }
 }
