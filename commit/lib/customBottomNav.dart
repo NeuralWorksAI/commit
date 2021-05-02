@@ -1,6 +1,22 @@
 import 'package:flutter/material.dart';
 import 'my_flutter_app_icons.dart';
+import 'friendslist-friend.dart';
+import 'activity.dart';
+import 'dashboard.dart';
 
+class NavbarBottom extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: CommitBottomNav(),
+      routes: <String, WidgetBuilder>{
+        '/Dashboard': (context) => Dashboard(),
+        '/ActivityPage': (context) => ActivityTab(),
+        '/FriendsPage': (context) => Friends(),
+      },
+    );
+  }
+}
 
 class CommitBottomNav extends StatefulWidget {
   @override
@@ -8,6 +24,8 @@ class CommitBottomNav extends StatefulWidget {
 }
 
 class _CommitBottomNavState extends State<CommitBottomNav> {
+  int _selectedIndex = 1;
+
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
@@ -17,8 +35,8 @@ class _CommitBottomNavState extends State<CommitBottomNav> {
               label: 'Friends',
               backgroundColor: Colors.white),
           BottomNavigationBarItem(
-              icon: Icon(MyFlutterApp.home),
-              label: ' ',
+              icon: Icon(Icons.home_outlined, size: 30),
+              label: 'Home',
               backgroundColor: Colors.white),
           BottomNavigationBarItem(
             icon: Icon(MyFlutterApp.activity),
@@ -26,6 +44,23 @@ class _CommitBottomNavState extends State<CommitBottomNav> {
             backgroundColor: Colors.white,
           ),
         ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.blue,
+        onTap: (index) {
+          setState(() {
+            _selectedIndex = index;
+            if (index == 0) {
+              Navigator.pushNamed(context, '/FriendsPage');
+            }
+            if (index == 1) {
+              Navigator.pushNamed(context, '/Dashboard');
+            }
+            if (index == 2) {
+              Navigator.pushNamed(context, '/ActivityPage');
+            }
+            print(index);
+          });
+        },
         type: BottomNavigationBarType.fixed,
         // currentIndex: _selectedIndex,
         //selectedItemColor: Colors.black,

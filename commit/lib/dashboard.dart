@@ -3,16 +3,17 @@ import 'package:flutter/material.dart';
 
 import 'my_flutter_app_icons.dart';
 import 'customBottomNav.dart';
-
-void main() {
-  runApp(Dashboard());
-}
+import 'createtask.dart';
 
 class Dashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: DashboardScreen(),
+      routes: <String, WidgetBuilder>{
+        '/Dashboard': (context)=> Dashboard(),
+        '/AddTask': (context)=> CreateTask(),
+      },
       
     );
   }
@@ -23,12 +24,16 @@ class DashboardScreen extends StatefulWidget {
   _DashboardScreenState createState() => _DashboardScreenState();
 }
 
-class _DashboardScreenState extends State<DashboardScreen> {
-  List<TaskList> tasks = [
+
+List<TaskList> tasks = [
     new TaskList("Write a blog post.", true),
     new TaskList("Do Econ 210 homework.", true),
-    new TaskList("Make pasta for dinner", false),
+    new TaskList("Make pasta for dinner.", false),
   ];
+
+
+class _DashboardScreenState extends State<DashboardScreen> {
+  
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +84,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 //         ),
               ),
               FlatButton(
-                onPressed: () {},
+                onPressed: () {
+                Navigator.pushNamed(context,'/AddTask');
+                },
                 child: Text(
                   "Add a task",
                   style: TextStyle(color: Colors.white),

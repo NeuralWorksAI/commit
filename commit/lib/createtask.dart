@@ -2,12 +2,8 @@ import 'package:date_format/date_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
+import 'dashboard.dart';
 import 'my_flutter_app_icons.dart';
-
-void main() {
-  runApp(CreateTask());
-}
 
 class CreateTask extends StatelessWidget {
   // This widget is the root of your application.
@@ -15,6 +11,7 @@ class CreateTask extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: CreateTaskPage(),
+      routes: <String, WidgetBuilder>{'/Dashboard': (context) => Dashboard()},
     );
   }
 }
@@ -55,7 +52,11 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
         ),
         toolbarHeight: 80.0,
       ),
-      body: CreateTaskForm(),
+      body: SingleChildScrollView(
+          child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: CreateTaskForm(),
+      )),
       bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
@@ -293,7 +294,10 @@ class CreateTaskFormState extends State<CreateTaskForm> {
               ),
               margin: new EdgeInsets.symmetric(horizontal: 20.0),
               child: new ElevatedButton(
-                onPressed: null,
+                onPressed: () {
+                  tasks.add(new TaskList("Go for a run outside.", false));
+                  Navigator.pushNamed(context, '/Dashboard');
+                },
                 child: const Text(
                   'Commit',
                   style: TextStyle(color: Colors.white),

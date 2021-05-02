@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import 'customBottomNav.dart';
 import 'my_flutter_app_icons.dart';
 
-void main() {
-  runApp(Friends());
-}
 
 class Friends extends StatelessWidget {
   // This widget is the root of your application.
