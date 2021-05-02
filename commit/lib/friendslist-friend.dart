@@ -4,15 +4,7 @@ import 'customBottomNav.dart';
 import 'my_flutter_app_icons.dart';
 
 
-class Friends extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: FriendsPage(),
-    );
-  }
-}
+
 
 class FriendsPage extends StatefulWidget {
   FriendsPage({Key key, this.title}) : super(key: key);
@@ -35,7 +27,7 @@ class _FriendsPageState extends State<FriendsPage> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Image.asset(
               'assets/searching.png',

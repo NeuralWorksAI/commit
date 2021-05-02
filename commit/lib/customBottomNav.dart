@@ -4,20 +4,6 @@ import 'friendslist-friend.dart';
 import 'activity.dart';
 import 'dashboard.dart';
 
-class NavbarBottom extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: CommitBottomNav(),
-      routes: <String, WidgetBuilder>{
-        '/Dashboard': (context) => Dashboard(),
-        '/ActivityPage': (context) => ActivityTab(),
-        '/FriendsPage': (context) => Friends(),
-      },
-    );
-  }
-}
-
 class CommitBottomNav extends StatefulWidget {
   @override
   _CommitBottomNavState createState() => _CommitBottomNavState();
@@ -53,7 +39,8 @@ class _CommitBottomNavState extends State<CommitBottomNav> {
               Navigator.pushNamed(context, '/FriendsPage');
             }
             if (index == 1) {
-              Navigator.pushNamed(context, '/Dashboard');
+              // Navigator.pushNamed(context, '/');
+              Navigator.popUntil(context,ModalRoute.withName(Navigator.defaultRouteName));
             }
             if (index == 2) {
               Navigator.pushNamed(context, '/ActivityPage');

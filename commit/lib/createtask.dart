@@ -1,3 +1,4 @@
+import 'package:commit/customBottomNav.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -57,28 +58,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
         padding: const EdgeInsets.all(8.0),
         child: CreateTaskForm(),
       )),
-      bottomNavigationBar: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-                icon: Icon(MyFlutterApp.friends),
-                label: 'Friends',
-                backgroundColor: Colors.white),
-            BottomNavigationBarItem(
-                icon: Icon(MyFlutterApp.home),
-                label: ' ',
-                backgroundColor: Colors.white),
-            BottomNavigationBarItem(
-              icon: Icon(MyFlutterApp.activity),
-              label: 'Activity',
-              backgroundColor: Colors.white,
-            ),
-          ],
-          type: BottomNavigationBarType.fixed,
-          // currentIndex: _selectedIndex,
-          //selectedItemColor: Colors.black,
-          iconSize: 20,
-          //onTap: _onItemTapped,
-          elevation: 5),
+      bottomNavigationBar: CommitBottomNav(),
     );
   }
 }

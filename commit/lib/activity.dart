@@ -1,6 +1,7 @@
+import 'package:commit/customBottomNav.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'customBottomNav.dart';
 import 'my_flutter_app_icons.dart';
 
 class ActivityTab extends StatelessWidget {
@@ -39,19 +40,24 @@ class _ActivityPageState extends State<ActivityPage> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Image.asset(
-              'assets/peace.png',
-              fit: BoxFit.contain,
-              height: 60,
+            Padding(
+              padding: const EdgeInsets.all(0),
+              child: Image.asset(
+                'assets/peace.png',
+                fit: BoxFit.contain,
+                height: 60,
+              ),
             ),
             Container(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(children: [
+                padding: const EdgeInsets.fromLTRB(5,0,0,8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                   Text('Activity'),
                   Text(
-                    "See current activities of your accountability\n partners and verify their proof-of-work!",
+                    "See current activities of your\npartners to verify their work",
                     style:
                         TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
                   ),
@@ -64,28 +70,7 @@ class _ActivityPageState extends State<ActivityPage> {
           child: new ListView(
         children: cards,
       )),
-      bottomNavigationBar: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-                icon: Icon(MyFlutterApp.friends),
-                label: 'Friends',
-                backgroundColor: Colors.white),
-            BottomNavigationBarItem(
-                icon: Icon(MyFlutterApp.home),
-                label: ' ',
-                backgroundColor: Colors.white),
-            BottomNavigationBarItem(
-              icon: Icon(MyFlutterApp.activity),
-              label: 'Activity',
-              backgroundColor: Colors.white,
-            ),
-          ],
-          type: BottomNavigationBarType.fixed,
-          // currentIndex: _selectedIndex,
-          //selectedItemColor: Colors.black,
-          iconSize: 20,
-          //onTap: _onItemTapped,
-          elevation: 5),
+      bottomNavigationBar: CommitBottomNav(),
     );
   }
 }
