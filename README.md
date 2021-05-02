@@ -9,9 +9,8 @@ It is clear that productivity is based around habits, and procrastination is a b
 
 2 reasons. So for humans to stick to deadlines, they need reward or threat. At school this threat is failing the course, detention etc. This is why we are always much more successful with completing school tasks. Another reason is the lack of motivation, we have nobody to review our work and keep us on track, this is basic psychology. But how do we solve these problems?
 
-## The solution? Commit!
+## The solution? COMMIT!
 
-![alt text](https://res.cloudinary.com/valentinesalim/image/upload/v1619872404/Peers-productivity_app_1_zsic23.gif)
 
 **COMMIT** is a peer-based productivity app dedicated to helping you stay committed and motivated to achieve your goals. To use commit, you write your daily goals when you wake up and add them to the todo list, then when you have completed them simply upload a photo of your achieved task!
 
