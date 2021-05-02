@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'my_flutter_app_icons.dart';
 import 'customBottomNav.dart';
 import 'createtask.dart';
 
@@ -38,16 +37,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: const Color(0xff324982)),
+      ),
       bottomNavigationBar: CommitBottomNav(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
-            child: Icon(
-              Icons.menu,
-              size: 30,
-            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -106,6 +105,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
         ],
       ),
+      
     );
   }
 }
@@ -135,10 +135,9 @@ class _TaskListState extends State<TaskList> {
         side: BorderSide(color: Colors.white, width: 1),
       ),
       child: Row(
-        
         children: [
           Expanded(
-                      child: Padding(
+            child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Expanded(
                   child: Text(
@@ -152,17 +151,15 @@ class _TaskListState extends State<TaskList> {
             data: ThemeData(
               unselectedWidgetColor: Colors.white,
             ),
-              child: Checkbox(
-                  checkColor: Colors.greenAccent,
-                  activeColor: Colors.white,
-                  value: widget.isDone,
-                  
-                  
-                  onChanged: (bool value) {
-                    setState(() {
-                      widget.isDone = value;
-                    });
-                  },
+            child: Checkbox(
+              checkColor: Colors.greenAccent,
+              activeColor: Colors.white,
+              value: widget.isDone,
+              onChanged: (bool value) {
+                setState(() {
+                  widget.isDone = value;
+                });
+              },
             ),
           ),
         ],
