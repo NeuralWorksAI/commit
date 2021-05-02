@@ -45,6 +45,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
+    - assets/
     - assets/pd.png
     - assets/announcment.png
     - assets/piyush.png
